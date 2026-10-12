@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff9ed">
+<meta name="description" content="Exploring autonomous Bitcoin agents anchored to UTXOs through Realms.">
+<title>UTXO Agent — Realms of Bitcoin</title>
+<style>
+:root {
+  --ink: #202044;
+  --pink: #ff78ae;
+  --blue: #76c9ff;
+  --green: #a9ef9c;
+  --yellow: #ffe36e;
+  --purple: #c6a5ff;
+  --paper: #fff9ed;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Trebuchet MS", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+.wrap { width: min(1120px, 90%); margin: auto; }
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0;
+}
+.logo {
+  font-size: 21px;
+  font-weight: 1000;
+  letter-spacing: -1px;
+}
+.logo b { color: #7451df; }
+.pill {
+  background: white;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  padding: 8px 13px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.hero {
+  text-align: center;
+  padding: 42px 0 24px;
+}
+.eyebrow {
+  display: inline-block;
+  padding: 9px 15px;
+  border-radius: 99px;
+  background: var(--yellow);
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: 1.5px;
+  transform: rotate(-2deg);
+}
+h1 {
+  max-width: 850px;
+  margin: 24px auto 16px;
+  font-size: clamp(42px, 8vw, 82px);
+  line-height: .99;
+  letter-spacing: -4px;
+  font-weight: 1000;
+}
+h1 .accent {
+  color: #7651df;
+  display: inline-block;
+  text-shadow: 3px 4px 0 #eadfff;
+}
+.lead {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: clamp(16px, 2.5vw, 20px);
+  line-height: 1.65;
+  color: #565575;
+}
+.orbit {
+  position: relative;
+  min-height: 340px;
+  margin: 10px auto 20px;
+  max-width: 940px;
+  isolation: isolate;
+}
+.orbit::before, .orbit::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border: 2px dashed #d9caff;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%) rotate(-12deg);
+  width: 70%;
+  height: 72%;
+}
+.orbit::after {
+  width: 46%;
+  height: 100%;
+  transform: translate(-50%,-50%) rotate(36deg);
+  border-color: #ffd0e4;
+}
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 145px;
+  height: 145px;
+  border-radius: 42% 58% 53% 47%;
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 7px 8px 0 var(--yellow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: breathe 4s ease-in-out infinite;
+}
+.center .symbol { font-size: 42px; line-height: 1.2; }
+.center strong { font-size: 12px; letter-spacing: 1px; }
+.realm {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  min-height: 58px;
+  padding: 10px 13px;
+  border: 2px solid var(--ink);
+  border-radius: 20px 24px 18px 25px;
+  font-size: 23px;
+  font-weight: 900;
+  box-shadow: 3px 4px 0 var(--ink);
+  animation: float 4s ease-in-out infinite;
+  user-select: none;
+}
+.realm small {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .4px;
+}
+.r1 { top: 7%; left: 9%; background: var(--pink); transform: rotate(-9deg); }
+.r2 { top: 4%; right: 13%; background: var(--blue); animation-delay: -.7s; }
+.r3 { top: 35%; left: 1%; background: var(--yellow); animation-delay: -1.4s; }
+.r4 { top: 34%; right: 2%; background: var(--green); animation-delay: -.5s; }
+.r5 { bottom: 8%; left: 12%; background: var(--purple); animation-delay: -2s; }
+.r6 { bottom: 3%; right: 12%; background: #ffb985; animation-delay: -1s; }
+.r7 { top: 1%; left: 39%; background: #b9f4df; animation-delay: -2.4s; }
+.r8 { bottom: 1%; left: 39%; background: #ffc9d9; animation-delay: -.9s; }
+.r9 { top: 19%; left: 25%; background: #d9f67d; animation-delay: -1.7s; }
+.r10 { top: 19%; right: 25%; background: #f4c4ff; animation-delay: -.3s; }
+.r11 { bottom: 22%; right: 28%; background: #b4d5ff; animation-delay: -2.2s; }
+@keyframes float {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+@keyframes breathe {
+  0%,100% { scale: 1; }
+  50% { scale: 1.04; }
+}
+.cta {
+  display: inline-block;
+  margin-top: 24px;
+  background: #7651df;
+  color: white;
+  padding: 16px 24px;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 0 6px 0 var(--ink);
+  text-decoration: none;
+  font-weight: 1000;
+  font-size: 14px;
+}
+.cta:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--ink);
+}
+.section { padding: 64px 0; }
+.section-heading {
+  text-align: center;
+  max-width: 690px;
+  margin: 0 auto 28px;
+}
+.section-heading h2 {
+  font-size: clamp(30px,5vw,45px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin: 0 0 12px;
+}
+.section-heading p { color: #66617d; line-height: 1.7; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 18px;
+}
+.card {
+  padding: 27px;
+  border: 2px solid var(--ink);
+  border-radius: 25px;
+  box-shadow: 5px 6px 0 var(--ink);
+}
+.card:nth-child(1) { background: #e5d9ff; }
+.card:nth-child(2) { background: #d7f7cd; }
+.card .emoji { font-size: 32px; }
+.card h3 { font-size: 23px; margin: 10px 0; }
+.card p { line-height: 1.75; margin-bottom: 0; }
+.banner {
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  border-radius: 28px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 5px 6px 0 var(--ink);
+}
+.banner h2 { margin: 0 0 12px; font-size: 28px; }
+.banner p { margin: auto; max-width: 640px; line-height: 1.7; }
+footer {
+  padding: 28px 0 40px;
+  text-align: center;
+  color: #77718d;
+  font-size: 12px;
+  line-height: 1.8;
+}
+footer strong { color: var(--ink); }
+@media(max-width:600px) {
+  header { padding: 17px 0; }
+  .logo { font-size: 18px; }
+  .pill { font-size: 9px; padding: 7px 9px; }
+  .hero { padding-top: 32px; }
+  h1 { letter-spacing: -2px; }
+  .orbit { min-height: 330px; margin-top: 18px; }
+  .center { width: 112px; height: 112px; }
+  .center .symbol { font-size: 32px; }
+  .realm { min-width: 48px; min-height: 44px; padding: 7px 9px; font-size: 19px; border-radius: 15px; }
+  .realm small { font-size: 8px; }
+  .r1 { left: 1%; top: 8%; }
+  .r2 { right: 2%; top: 5%; }
+  .r3 { left: 0; top: 39%; }
+  .r4 { right: 0; top: 40%; }
+  .r5 { left: 2%; bottom: 7%; }
+  .r6 { right: 2%; bottom: 4%; }
+  .r7 { left: 36%; top: 0; }
+  .r8 { left: 36%; bottom: 0; }
+  .r9 { left: 18%; top: 22%; }
+  .r10 { right: 17%; top: 22%; }
+  .r11 { right: 17%; bottom: 23%; }
+  .cards { grid-template-columns: 1fr; }
+  .section { padding: 48px 0; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="logo">UTXO<b>AGENT</b> ✳</div>
+  <div class="pill">BITCOIN × AI</div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="eyebrow">A new frontier is orbiting Bitcoin</div>
+    <h1>Small names.<br> <span class="accent">Autonomous worlds.</span></h1>
+    <p class="lead">
+      Coming soon: autonomous agents on Bitcoin,
+      anchored to UTXOs through Realms.
+    </p>
+
+    <div class="orbit" aria-label="Colorful Realm names orbiting UTXO Agent">
+      <div class="center">
+        <div class="symbol">₿</div>
+        <strong>UTXO<br>AGENT</strong>
+      </div>
+      <div class="realm r1" title="Arabic ligature Bismillah">+﷽</div>
+      <div class="realm r2" title="Taito character">+𱁬</div>
+      <div class="realm r3" title="Biang character">+𰻞</div>
+      <div class="realm r4" title="Samsung in Hangul">+삼성</div>
+      <div class="realm r5" title="Indian rupee sign">+₹</div>
+      <div class="realm r6" title="Unicode emoji">+🫪</div>
+      <div class="realm r7" title="Private-use character U+F8FF"><small>+U+F8FF</small></div>
+      <div class="realm r8" title="Private-use character U+EA00"><small>+U+EA00</small></div>
+      <div class="realm r9" title="Korean surname Park">+박</div>
+      <div class="realm r10" title="Sri Lanka flag">+🇱🇰</div>
+      <div class="realm r11" title="Takeaway box and chopsticks">+🥡🥢</div>
+    </div>
+    <a class="cta" href="#realms">Explore the idea ↓</a>
+  </section>
+
+  <section class="section wrap" id="realms">
+    <div class="section-heading">
+      <h2>What if a name could become an agent?</h2>
+      <p>Realms are more than colorful words. They are unique names registered through the Atomicals protocol on Bitcoin.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="emoji">🌱</div>
+        <h3>Every Realm has an identity</h3>
+        <p>
+          A Realm is a unique name anchored in Bitcoin through
+          Atomicals. It can represent a person, a community,
+          a project or an idea. Its ownership follows the
+          protocol's rules, rather than a username controlled
+          by a single website.
+        </p>
+      </article>
+      <article class="card">
+        <div class="emoji">🤖</div>
+        <h3>What if Realms could host agents?</h3>
+        <p>
+          If AVM becomes operational and the required tools
+          are built, a Realm could potentially serve as the
+          persistent identity of an autonomous software agent.
+          Such agents might communicate, perform permitted
+          tasks, manage assets and interact with other agents
+          under defined rules and spending limits.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="banner">
+      <h2>Built on Bitcoin. Designed to explore.</h2>
+      <p>
+        Bitcoin provides the underlying transaction record.
+        UTXOs represent spendable outputs. Realms offer unique
+        names. AVM could add programmable rules if its execution
+        stack becomes operational. Together, these pieces inspire
+        a new way to think about autonomous digital identities.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>UTXO AGENT</strong> · Independent early-stage project<br>
+    A research direction, not a live autonomous-agent service.<br>
+    No guarantees of permanence, censorship resistance or financial outcomes.
+  </div>
+</footer>
+</body>
+</html>
+  
