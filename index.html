@@ -3,7 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>UTXOAGENT — My Collection</title>
+<title>UTXOAGENT — Bitcoin-anchored autonomous agents and Realms</title>
+<meta name="description" content="Autonomous agents anchored to Bitcoin UTXOs. A collection of 1,193 Atomicals Realms, a thesis on UTXO-based agent identity, and a worked +bitagent example.">
+<link rel="canonical" href="https://www.utxoagent.com/">
+<meta property="og:title" content="UTXOAGENT — Small names. Autonomous worlds.">
+<meta property="og:description" content="Autonomous agents anchored to Bitcoin UTXOs.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://www.utxoagent.com/">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -110,7 +115,7 @@ footer{text-align:center;padding:34px 0 50px;color:var(--soft);font-size:.9rem}
 @media(max-width:560px){.step,.step:nth-child(even){flex-direction:row;text-align:left}.stage{height:480px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
 
-.tabs{display:flex;gap:6px}.tabs a{font-weight:900;text-decoration:none;color:var(--soft);padding:8px 14px;border-radius:12px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}nav{flex-wrap:wrap;gap:8px}.tabs a{font-weight:900;text-decoration:none;color:var(--soft);padding:8px 14px;border-radius:12px}
 .tabs a.on{background:#ddf4ff;color:var(--blue-d);box-shadow:inset 0 0 0 2px var(--blue)}
 @media(max-width:560px){.tabs a{padding:6px 8px;font-size:.85rem}.logo{font-size:1.1rem}nav .btn.sm{display:none}}
 .chead{text-align:center;padding:30px 0 10px}.chead h1{font-size:clamp(2.4rem,9vw,4.4rem)}.chead h1 b{color:var(--pink)}
@@ -142,11 +147,12 @@ footer{text-align:center;padding:34px 0 50px;color:var(--soft);font-size:.9rem}
 .rc{color:var(--tc,#fff);box-shadow:0 8px 20px -6px var(--c);border-bottom-width:6px}
 .nosn{font-family:'Nunito','Trebuchet MS',system-ui,sans-serif!important}
 .stage{margin-bottom:26px}
+#lang{font:900 .85rem var(--font);border:2px solid var(--line);border-bottom-width:4px;background:#fff;color:var(--blue-d);padding:6px 11px;border-radius:12px;cursor:pointer}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <nav><a class="logo" href="#">✳ utxoagent</a><div class="tabs"><a href="#" id="t-home">Home</a><a href="#collection" id="t-coll">My Collection</a></div><a class="btn sm" href="mailto:g47s@proton.me">Contact</a></nav>
+  <nav><a class="logo" href="#">✳ utxoagent</a><div class="tabs"><a href="#" id="t-home">Home</a><a href="#collection" id="t-coll">My Collection</a><a href="tesis.html" data-p="tesis">Thesis</a><a href="ejemplo.html" data-p="ejemplo">Example</a><button id="lang" aria-label="Language">ES</button></div><a class="btn sm" href="mailto:g47s@proton.me">Contact</a></nav>
 
   <div id="home"><header class="hero">
     <div class="stage" aria-hidden="true">
@@ -175,11 +181,26 @@ footer{text-align:center;padding:34px 0 50px;color:var(--soft);font-size:.9rem}
       <span class="rc" style="--x:36%;--y:76%;--r:3deg;--c:#ff5e00;--cd:#c24500;--tc:#fff;--t:4.8s;--d:-7.0s">+𒀭</span>
       <span class="rc" style="--x:68%;--y:76%;--r:-4deg;--c:#a64dff;--cd:#7a2ed1;--tc:#fff;--t:5.2s;--d:-7.7s">+𓃰</span>
       <span class="rc" style="--x:36%;--y:89%;--r:5deg;--c:#ffe600;--cd:#c9b400;--tc:#222;--t:5.6s;--d:-8.4s">+🥡🥢</span>
+      <span class="rc" style="--x:calc(50% - 52px);--y:calc(50% - 158px);--r:-3deg;--c:#161616;--cd:#000;--tc:#c6ff00;--t:5s;--d:-1s;box-shadow:0 0 24px rgba(198,255,0,.75)">+Borges</span>
     </div>
     <h1>Small names.<br><b>Autonomous worlds.</b></h1>
-    <p>What happens when a name is more than a name? A Bitcoin-native experiment with Atomicals Realms.</p>
+    <p>Autonomous agents anchored to Bitcoin UTXOs, named through Atomicals Realms. Native, permanent and transferable.</p>
     <div class="cta"><a class="btn" href="#collection">See my collection</a><a class="btn blue" href="#path">Start exploring</a><a class="btn ghost" href="#vocab">Learn the words</a></div>
   </header>
+
+  <section id="agents">
+    <div class="head"><h2>Agents, native to Bitcoin</h2><p>An autonomous agent needs an identity that is its own. Anchoring it to a Bitcoin UTXO makes that identity permanent, portable and checked by everyone.</p></div>
+    <div class="grid">
+      <div class="card" style="--c:var(--green);--cd:var(--green-d)"><div class="em">🔗</div><h3>Anchored to a UTXO</h3><p>An agent's identity lives on a Bitcoin output, not in a company's database.</p></div>
+      <div class="card" style="--c:var(--blue);--cd:var(--blue-d)"><div class="em">♾️</div><h3>Built to last</h3><p>As long as Bitcoin runs, the anchor stays. No platform can switch it off.</p></div>
+      <div class="card" style="--c:var(--pink);--cd:var(--pink-d)"><div class="em">🔁</div><h3>Transferable</h3><p>Hand an agent to someone else by moving its UTXO. The history stays public.</p></div>
+      <div class="card" style="--c:var(--orange);--cd:var(--orange-d)"><div class="em">🪙</div><h3>No rent, no subscription</h3><p>No monthly fees or platform cuts. Moving it only costs a regular Bitcoin network fee.</p></div>
+      <div class="card" style="--c:var(--purple);--cd:var(--purple-d)"><div class="em">🗝️</div><h3>Sovereign</h3><p>Whoever holds the keys controls the agent. Nobody can suspend the name.</p></div>
+      <div class="card" style="--c:var(--yellow);--cd:var(--yellow-d)"><div class="em">🔎</div><h3>Verifiable</h3><p>Anyone can check who owns an agent and when it changed hands.</p></div>
+    </div>
+    <p class="note">The agent's software runs off-chain; Bitcoin anchors who it is.</p>
+    <div class="cta" style="margin-top:22px"><a class="btn" href="tesis.html" data-p="tesis">Read the thesis</a><a class="btn ghost" href="ejemplo.html" data-p="ejemplo">See the +bitagent example</a></div>
+  </section>
 
   <section>
     <div class="head"><h2>A name anchored to Bitcoin</h2><p>Atomicals lets people create digital objects directly on Bitcoin. Realms bring human-readable names into that world.</p></div>
@@ -236,7 +257,6 @@ footer{text-align:center;padding:34px 0 50px;color:var(--soft);font-size:.9rem}
     <h1>MY <b>COLLECTION</b></h1>
     <p><span id="cnt">0</span> realms. Tocá uno para copiar su nombre.</p>
   </div>
-  <div class="joyas wrap"><h2>✨ Joyas</h2><p>Algunos de los realms más especiales de la colección.</p><div id="jgrid" class="jgrid"></div></div>
   <div class="chead" style="padding-top:0">
     <input id="q" type="search" placeholder="Buscar por nombre o descripción…" aria-label="Buscar">
     <div id="chips" class="chips"></div>
@@ -253,42 +273,49 @@ var D=[[1,"bmail","Bitcoin y marcas","Correo Base B"],[2,"btcmail","Bitcoin y ma
 var cats=[],cm={};D.forEach(function(r){cm[r[2]]=(cm[r[2]]||0)+1});
 Object.keys(cm).sort(function(a,b){return cm[b]-cm[a]}).forEach(function(c){cats.push(c)});
 var colorOf={};cats.forEach(function(c,i){colorOf[c]=PAL[i%PAL.length]});
-var ICON={1122:'<svg viewBox="0 0 24 24"><path d="M12 7c-1.5-1-5-1-6 2.5-1 3.5 1.5 9.5 4 9.5 1 0 1.5-.5 2-.5s1 .5 2 .5c2.5 0 5-6 4-9.5-1-3.5-4.5-3.5-6-2.5z"/><path d="M12 7c0-2 1-3.5 3-4 0 2-1 3.5-3 4z"/></svg>',1132:'<svg viewBox="0 0 24 24"><ellipse cx="11" cy="14" rx="7" ry="5"/><circle cx="17" cy="9" r="3.2"/><path d="M19.8 8.5l3.2 1-3.2 1z"/><path d="M5 12L1 8l6 2z"/></svg>'};
-var JOY=[[1132,'Larry Bird, el pájaro de Twitter. Es un carácter privado: casi ningún dispositivo lo dibuja.'],[1122,'El logo de Apple. Solo se ve en dispositivos Apple, por eso acá va dibujado.'],[1126,'La ventana de Windows.'],[751,'Bismillah: "En el nombre de Alá", en un solo carácter.'],[494,'Cuatro dragones juntos: 64 trazos.'],[514,'Biáng, el carácter de los fideos: 58 trazos.'],[599,'El Ankh, símbolo egipcio de la vida.'],[592,'Dingir: el signo sumerio de "dios".'],[407,'El "yo" del emperador de China.'],[531,'Satoshi Nakamoto, con un carácter invisible en el medio.']];
+var ICON={};
+var LANG='en';try{LANG=localStorage.getItem('lang')||((navigator.language||'').toLowerCase().indexOf('es')===0?'es':'en')}catch(e){}
+var CL={"Todos": "All", "Por confirmar": "To confirm", "Chino": "Chinese", "Glifos raros": "Rare glyphs", "Símbolos": "Symbols", "Coreano": "Korean", "Banderas": "Flags", "Árabe": "Arabic", "Bitcoin y marcas": "Bitcoin & brands", "Nombres": "Names", "Antiguas": "Ancient", "Palabras": "Words", "Emojis": "Emojis", "Monedas": "Currencies", "Estilizados": "Styled", "Japonés": "Japanese", "Tailandés": "Thai", "Otros alfabetos": "Other scripts"},TR=[["Home", "Inicio"], ["My Collection", "Mi colección"], ["Thesis", "Tesis"], ["Example", "Ejemplo"], ["Contact", "Contacto"], ["Small names.", "Nombres pequeños."], ["Autonomous worlds.", "Mundos autónomos."], ["Autonomous agents anchored to Bitcoin UTXOs, named through Atomicals Realms. Native, permanent and transferable.", "Agentes autónomos anclados a UTXO de Bitcoin, con nombre gracias a los Realms de Atomicals. Nativos, permanentes y transferibles."], ["See my collection", "Ver mi colección"], ["Start exploring", "Empezar a explorar"], ["Learn the words", "Aprender las palabras"], ["A name anchored to Bitcoin", "Un nombre anclado a Bitcoin"], ["Atomicals lets people create digital objects directly on Bitcoin. Realms bring human-readable names into that world.", "Atomicals permite crear objetos digitales directamente en Bitcoin. Los Realms traen a ese mundo nombres legibles para las personas."], ["Names with roots", "Nombres con raíces"], ["An identity or shared reference tied to Bitcoin, not to an account database.", "Una identidad o referencia compartida atada a Bitcoin, no a una base de datos de cuentas."], ["Worlds within worlds", "Mundos dentro de mundos"], ["Subrealms, containers and digital objects help communities organize themselves.", "Los subrealms, contenedores y objetos digitales ayudan a las comunidades a organizarse."], ["Room to build", "Espacio para construir"], ["Tools, marketplaces, identity systems: what gets built is the open question.", "Herramientas, mercados, sistemas de identidad: qué se construya es la pregunta abierta."], ["From Realm to agent", "De Realm a agente"], ["One possible path, step by step. A Realm becomes the public identity of an autonomous agent.", "Un camino posible, paso a paso. Un Realm se convierte en la identidad pública de un agente autónomo."], ["Pick a name", "Elegí un nombre"], ["A scarce, human-readable Realm anchored to a Bitcoin UTXO.", "Un Realm escaso y legible, anclado a un UTXO de Bitcoin."], ["Give it an agent", "Dale un agente"], ["Software that speaks and acts under that name.", "Software que habla y actúa bajo ese nombre."], ["Coordinate tasks", "Coordiná tareas"], ["Discoverable by name, able to work with people and other agents.", "Se encuentra por su nombre y puede trabajar con personas y otros agentes."], ["Grow a world", "Hacé crecer un mundo"], ["Subrealms and objects connect into a community.", "Subrealms y objetos se conectan en una comunidad."], ["Exploratory idea, not a promise of features or protocol behavior.", "Idea exploratoria, no una promesa de funciones ni del comportamiento del protocolo."], ["Quick vocab", "Vocabulario rápido"], ["Five words and you're in.", "Cinco palabras y ya estás adentro."], ["An unspent Bitcoin output. The anchor that a name or object hangs on.", "Una salida de Bitcoin sin gastar. El ancla de la que cuelga un nombre u objeto."], ["A protocol for digital objects that live directly on Bitcoin.", "Un protocolo para objetos digitales que viven directamente en Bitcoin."], ["A human-readable name registered through Atomicals.", "Un nombre legible registrado mediante Atomicals."], ["A name inside a Realm, like a room inside a house.", "Un nombre dentro de un Realm, como una habitación dentro de una casa."], ["Autonomous software that could use a Realm as its public identity.", "Software autónomo que podría usar un Realm como identidad pública."], ["Good questions", "Buenas preguntas"], ["Is this a product?", "¿Es un producto?"], ["No. UTXOAGENT is an independent community experiment exploring ideas, not a finished service.", "No. UTXOAGENT es un experimento comunitario independiente que explora ideas, no un servicio terminado."], ["Does it promise future features?", "¿Promete funciones futuras?"], ["No. Everything here is exploratory and may change or never happen.", "No. Todo acá es exploratorio y puede cambiar o no ocurrir nunca."], ["Why use Bitcoin for names?", "¿Por qué usar Bitcoin para nombres?"], ["Names anchored to Bitcoin are scarce and don't depend on a single company's account system.", "Los nombres anclados a Bitcoin son escasos y no dependen del sistema de cuentas de una sola empresa."], ["How can I take part?", "¿Cómo puedo participar?"], ["Write to us. We are happy to talk with anyone curious about Realms and agents.", "Escribinos. Nos encanta hablar con cualquiera curioso por los Realms y los agentes."], ["Ready to explore?", "¿Listo para explorar?"], ["Built on Bitcoin. Designed to explore. Come say hi.", "Construido sobre Bitcoin. Hecho para explorar. Vení a saludar."], ["Get in touch", "Escribinos"], ["An independent community experiment.", "Un experimento comunitario independiente."], ["realms. Tap one to copy its name.", "realms. Tocá uno para copiar su nombre."], ["Some very rare symbols may look like little boxes depending on your device. Those marked with ? are waiting for their exact name to be confirmed.", "Algunos símbolos muy raros pueden verse como cuadraditos según tu dispositivo. Los marcados con ? esperan que se confirme su nombre exacto."]];
+TR.push.apply(TR,[["Agents, native to Bitcoin", "Agentes, nativos de Bitcoin"], ["An autonomous agent needs an identity that is its own. Anchoring it to a Bitcoin UTXO makes that identity permanent, portable and checked by everyone.", "Un agente autónomo necesita una identidad propia. Anclarla a un UTXO de Bitcoin la vuelve permanente, portátil y verificable por todos."], ["The agent's software runs off-chain; Bitcoin anchors who it is.", "El software del agente corre fuera de la cadena; Bitcoin ancla quién es."], ["Read the thesis", "Leer la tesis"], ["See the +bitagent example", "Ver el ejemplo de +bitagent"], ["Anchored to a UTXO", "Anclado a un UTXO"], ["Built to last", "Hecho para durar"], ["Transferable", "Transferible"], ["No rent, no subscription", "Sin alquiler ni suscripción"], ["Sovereign", "Soberano"], ["Verifiable", "Verificable"], ["An agent's identity lives on a Bitcoin output, not in a company's database.", "La identidad de un agente vive en una salida de Bitcoin, no en la base de datos de una empresa."], ["As long as Bitcoin runs, the anchor stays. No platform can switch it off.", "Mientras Bitcoin funcione, el ancla sigue ahí. Ninguna plataforma puede apagarla."], ["Hand an agent to someone else by moving its UTXO. The history stays public.", "Entregá un agente a otra persona moviendo su UTXO. El historial queda público."], ["No monthly fees or platform cuts. Moving it only costs a regular Bitcoin network fee.", "Sin cuotas mensuales ni comisiones de plataforma. Moverlo solo cuesta la comisión normal de la red Bitcoin."], ["Whoever holds the keys controls the agent. Nobody can suspend the name.", "Quien tiene las claves controla al agente. Nadie puede suspender el nombre."], ["Anyone can check who owns an agent and when it changed hands.", "Cualquiera puede comprobar quién es dueño de un agente y cuándo cambió de manos."]]);
+function LB(x){return LANG==='es'?x:(CL[x]||x)}
+function setLang(l){LANG=l;try{localStorage.setItem('lang',l)}catch(e){}document.documentElement.lang=l;
+ var m={};TR.forEach(function(p){if(l==='es'){m[p[0]]=p[1]}else{m[p[1]]=p[0]}});
+ var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p||/^(SCRIPT|STYLE)$/.test(p.nodeName)||p.closest('#grid,#chips'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT}}),a=[],n;
+ while(n=w.nextNode())a.push(n);a.forEach(function(n){var t=n.nodeValue.trim();if(t&&m[t]){n.nodeValue=n.nodeValue.replace(t,m[t])}});
+ var q=document.getElementById('q');q.placeholder=l==='es'?'Buscar por nombre o descripción…':'Search by name or description…';
+ Array.prototype.forEach.call(document.querySelectorAll('a[data-p]'),function(a){a.href=a.dataset.p+(l==='es'?'-es':'')+'.html'});
+ document.getElementById('lang').textContent=l==='es'?'EN':'ES';bc();apply()}
+document.getElementById('lang').onclick=function(){setLang(LANG==='es'?'en':'es')};
 var sel="",qs="",shown=0,STEP=96,list=D;
 var grid=document.getElementById('grid'),more=document.getElementById('more'),chips=document.getElementById('chips');
 document.getElementById('cnt').textContent=D.length;
 function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
-function mkChip(label,val,n){var b=document.createElement('button');b.className='chip';b.textContent=label+' '+n;b.dataset.v=val;
+function mkChip(label,val,n){var b=document.createElement('button');b.className='chip';b.textContent=LB(label)+' '+n;b.dataset.v=val;
  var c=colorOf[val]||PAL[1];b.style.setProperty('--c',c[0]);b.style.setProperty('--cd',c[1]);b.onclick=function(){sel=val;apply()};chips.appendChild(b)}
-mkChip('Todos','',D.length);cats.forEach(function(c){mkChip(c,c,cm[c])});
+function bc(){chips.innerHTML='';mkChip('Todos','',D.length);cats.forEach(function(c){mkChip(c,c,cm[c])})}bc();
 function toast(t){var e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(function(){e.remove()},1400)}
-function copy(t){try{navigator.clipboard.writeText(t).then(function(){toast('Copiado: '+t)},function(){toast('No se pudo copiar')})}catch(e){toast('No se pudo copiar')}}
+function copy(t){try{navigator.clipboard.writeText(t).then(function(){toast((LANG==='es'?'Copiado: ':'Copied: ')+t)},function(){toast(LANG==='es'?'No se pudo copiar':'Could not copy')})}catch(e){toast(LANG==='es'?'No se pudo copiar':'Could not copy')}}
 function tile(r){var c=colorOf[r[2]]||PAL[1],p=!r[1],n=p?'?':r[1],L=Array.from(n).length;
  var d=document.createElement('button');d.className='tile'+(p?' pend':'');d.style.setProperty('--c',c[0]);
  var fs=L<=2?'2.8rem':L<=4?'2.2rem':L<=8?'1.6rem':L<=14?'1.2rem':'.95rem';
  var no=document.createElement('span');no.className='no';no.textContent='#'+r[0];
- var tg=document.createElement('span');tg.className='tag';tg.textContent=r[2];
+ var tg=document.createElement('span');tg.className='tag';tg.textContent=LB(r[2]);
  var nm=document.createElement('div');nm.className='nm';nm.style.fontSize=fs;if(ICON[r[0]]){nm.innerHTML=ICON[r[0]]}else{nm.textContent=n};if(n.indexOf('\ufdfd')>-1)nm.classList.add('nosn')
  var ds=document.createElement('div');ds.className='ds';ds.textContent=r[3];
  d.append(no,tg,nm,ds);if(!p)d.onclick=function(){copy(r[1])};return d}
 function render(reset){if(reset){grid.innerHTML='';shown=0}
  var f=document.createDocumentFragment(),end=Math.min(shown+STEP,list.length);
  for(var i=shown;i<end;i++)f.appendChild(tile(list[i]));grid.appendChild(f);shown=end;
- if(!list.length){grid.innerHTML='<div class="empty">No hay realms con esa búsqueda.</div>'}
- more.parentNode.hidden=shown>=list.length;more.textContent='Ver más ('+(list.length-shown)+')'}
+ if(!list.length){grid.innerHTML='<div class="empty">'+(LANG==='es'?'No hay realms con esa búsqueda.':'No realms match that search.')+'</div>'}
+ more.parentNode.hidden=shown>=list.length;more.textContent=(LANG==='es'?'Ver más (':'Show more (')+(list.length-shown)+')'}
 function apply(){var q=norm(qs);list=D.filter(function(r){return(!sel||r[2]===sel)&&(!q||norm(r[1]+' '+r[3]+' '+r[2]+' #'+r[0]).indexOf(q)>-1)});
  Array.prototype.forEach.call(chips.children,function(b){b.classList.toggle('on',b.dataset.v===sel)});render(true)}
 document.getElementById('q').addEventListener('input',function(e){qs=e.target.value;apply()});
 more.onclick=function(){render(false)};
-(function(){var jg=document.getElementById('jgrid'),byN={};D.forEach(function(r){byN[r[0]]=r});
-JOY.forEach(function(j,i){var r=byN[j[0]];if(!r)return;var c=PAL[i%PAL.length],b=document.createElement('button');b.className='jt';b.style.setProperty('--c',c[0]);b.style.setProperty('--cd',c[1]);
-var g=document.createElement('div');g.className='g';if(ICON[r[0]])g.innerHTML=ICON[r[0]];else g.textContent=r[1];if(r[1].indexOf('\ufdfd')>-1)g.classList.add('nosn');
-var no=document.createElement('b');no.textContent='#'+r[0]+' · '+r[2];var t=document.createElement('span');t.textContent=j[1];b.append(g,no,t);b.onclick=function(){copy(r[1])};jg.appendChild(b)})})();
 var home=document.getElementById('home'),coll=document.getElementById('coll'),th=document.getElementById('t-home'),tc=document.getElementById('t-coll');
 function route(){var c=location.hash==='#collection';home.hidden=c;coll.hidden=!c;th.classList.toggle('on',!c);tc.classList.toggle('on',c);
  if(c){window.scrollTo(0,0)}else if(location.hash.length>1){var el=document.getElementById(location.hash.slice(1));if(el)el.scrollIntoView()}else{window.scrollTo(0,0)}}
-window.addEventListener('hashchange',route);apply();route();
+window.addEventListener('hashchange',function(){route();try{window.goatcounter&&window.goatcounter.count&&window.goatcounter.count({path:location.hash==='#collection'?'/collection':'/'})}catch(e){}});apply();route();setLang(LANG);
 })();
 </script>
 <script data-goatcounter="https://utxoagent.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

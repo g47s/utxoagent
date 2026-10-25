@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agentes autónomos anclados a Bitcoin: tesis sobre identidad UTXO | UTXOAGENT</title>
+<meta name="description" content="Por qué los agentes autónomos deberían anclar su identidad a UTXO de Bitcoin mediante Realms de Atomicals: ocho argumentos, arquitectura, modelo de organización y riesgos.">
+<link rel="canonical" href="https://www.utxoagent.com/tesis-es.html">
+<link rel="alternate" hreflang="en" href="https://www.utxoagent.com/tesis-es.html"><link rel="alternate" hreflang="es" href="https://www.utxoagent.com/tesis-es.html"><link rel="alternate" hreflang="x-default" href="https://www.utxoagent.com/tesis-es.html">
+<meta property="og:title" content="Agentes autónomos anclados a Bitcoin: tesis sobre identidad UTXO"><meta property="og:description" content="Por qué la identidad basada en UTXO es el fundamento correcto para agentes autónomos."><meta property="og:type" content="article"><meta property="og:url" content="https://www.utxoagent.com/tesis-es.html">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3c3c3c;--soft:#666;--line:#e5e5e5;--green:#58cc02;--blue:#1cb0f6;--pink:#ff2e93;--font:'Nunito','Trebuchet MS',system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}body{margin:0;background:#fff;color:var(--ink);font:600 1.08rem/1.7 var(--font);overflow-x:hidden}
+.w{max-width:760px;margin:0 auto;padding:0 20px}nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:2px solid var(--line);max-width:980px;margin:0 auto}
+.logo{font-weight:900;font-size:1.3rem;color:var(--green);text-decoration:none}.tabs{display:flex;gap:4px;flex-wrap:wrap}.tabs a{font-weight:900;text-decoration:none;color:var(--soft);padding:8px 12px;border-radius:12px}.tabs a.on{background:#ddf4ff;color:#1899d6;box-shadow:inset 0 0 0 2px var(--blue)}
+h1{font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.08;letter-spacing:-.02em;margin:32px 0 10px;font-weight:900}h2{font-size:1.6rem;line-height:1.2;margin:42px 0 8px;font-weight:900}h3{font-size:1.2rem;margin:24px 0 4px;font-weight:900;color:#1899d6}
+p{margin:0 0 14px}.meta{color:var(--soft);font-size:.95rem}.box{border:2px solid var(--line);border-bottom-width:5px;border-radius:18px;padding:16px 20px;margin:18px 0;background:#f7fcff}
+a{color:#1899d6}ol.refs{padding-left:20px;font-size:.95rem}footer{text-align:center;color:var(--soft);padding:36px 20px 50px;font-size:.9rem}
+.root{display:inline-block;background:var(--pink);color:#fff;font-weight:900;font-size:2rem;padding:10px 26px;border-radius:20px;border-bottom:6px solid #c4166b}
+.br{border:3px solid var(--cd);border-bottom-width:7px;border-radius:22px;padding:16px 18px;margin:16px 0;background:var(--c)}.br h2{margin:0 0 8px;color:var(--tc)}.br ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.br li{background:#fff;border-radius:12px;padding:8px 12px;font-size:.98rem;line-height:1.35}.br code{font-weight:900;color:var(--cd);word-break:break-all}.br span{display:block;color:var(--soft);font-weight:600;font-size:.9rem}
+</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"Agentes autónomos anclados a Bitcoin: por qué la identidad basada en UTXO es el fundamento correcto","description":"Tesis sobre por qué los agentes autónomos deberían anclar su identidad a UTXO de Bitcoin mediante Realms de Atomicals.","inLanguage":"es","datePublished":"2026-10-25","author":{"@type":"Organization","name":"UTXOAGENT"},"publisher":{"@type":"Organization","name":"UTXOAGENT","url":"https://www.utxoagent.com/"},"mainEntityOfPage":"https://www.utxoagent.com/tesis-es.html","keywords":"bitcoin agents, UTXO, Atomicals, Realms, autonomous agents, digital identity"}</script></head><body>
+<nav><a class="logo" href="/">✳ utxoagent</a><div class="tabs"><a href="/">Inicio</a><a href="/#collection">Mi colección</a><a href="tesis-es.html" class="on">Tesis</a><a href="ejemplo-es.html">Ejemplo</a><a href="tesis.html" hreflang="en" style="font-weight:900;text-decoration:none;padding:8px 12px;border:2px solid #e5e5e5;border-bottom-width:4px;border-radius:12px">EN</a></div></nav>
+<main class="w"><article>
+<h1>Agentes autónomos anclados a Bitcoin: por qué la identidad basada en UTXO es el fundamento correcto</h1>
+<p class="meta">UTXOAGENT · Tesis exploratoria · 2026</p>
+<div class="box"><p><b>Resumen.</b> Los agentes de software autónomos necesitan una identidad que ninguna plataforma pueda revocar, un registro que cualquiera pueda auditar y una forma de tener y mover valor. Esta tesis sostiene que anclar la identidad de un agente a un UTXO de Bitcoin, mediante un nombre legible como un Realm de Atomicals, cumple esas necesidades mejor que las cuentas, las claves de API o los nombres que entrega una plataforma. Presenta ocho argumentos, una arquitectura por capas, un modelo de organización y una lista honesta de riesgos.</p></div>
+<h2>1. El problema de la identidad de los agentes</h2>
+<p>Hoy un agente de inteligencia artificial suele existir como una fila en la base de datos de otro. Su nombre es una cuenta, su autoridad es una clave de API y su reputación vive en una plataforma que puede cambiar las reglas, suspenderlo o desaparecer. A medida que los agentes actúan por personas y organizaciones, manejan presupuestos y se coordinan entre sí, esa dependencia se vuelve el eslabón más débil. Un agente que no puede probar quién es, o cuya identidad puede quitarle un tercero, no merece confianza para manejar nada de valor.</p>
+<h2>2. Contexto</h2>
+<h3>2.1 El modelo UTXO</h3>
+<p>Bitcoin no guarda saldos de cuentas. Registra salidas de transacción sin gastar (UTXO): piezas de valor bloqueadas por una condición de gasto, normalmente una clave pública. Gastar una exige cumplir esa condición, consume la salida y crea otras nuevas (Nakamoto, 2008). Cada UTXO tiene un historial público, un dueño en sentido criptográfico y un único estado: gastado o sin gastar.</p>
+<h3>2.2 Atomicals y los Realms</h3>
+<p>Atomicals es un protocolo que adjunta objetos digitales a satoshis individuales, de modo que el objeto viaja con el UTXO que lo lleva. Los Realms son nombres legibles dentro del protocolo, escritos con un signo más, como +bitagent. Un Realm puede ser dueño de subrealms, lo que permite anidar nombres en una jerarquía. Las reglas del protocolo las interpretan indexadores que leen los datos de Bitcoin, mientras que la propiedad y las transferencias se apoyan en transacciones comunes de Bitcoin. Los detalles del protocolo evolucionan, por lo que conviene consultar su documentación vigente.</p>
+<h2>3. Tesis</h2>
+<p><b>Un agente autónomo debería derivar su identidad y su autoridad de un UTXO de Bitcoin, porque eso le da una identidad soberana, escasa, verificable y componible, protegida por el libro público más robusto que existe.</b> Ocho argumentos respaldan esta idea.</p>
+<h3>3.1 Soberana y portable</h3>
+<p>Quien controla las claves controla el nombre. Ninguna plataforma puede suspenderlo, y la identidad del agente puede moverse entre entornos, nubes y proveedores sin pedir permiso. El agente sobrevive a la empresa que lo alojaba.</p>
+<h3>3.2 Escasa y legible</h3>
+<p>Un nombre registrado en la cadena es único. Dos agentes no pueden reclamar el mismo, y suplantarlo exige vencer las reglas de registro, no completar un formulario. Las personas pueden recordar +bitagent; no pueden recordar una clave pública.</p>
+<h3>3.3 Procedencia verificable</h3>
+<p>Cada creación y transferencia del nombre es pública. Cualquiera puede comprobar quién controló a un agente y cuándo cambió de manos, lo que da a auditores, contrapartes y usuarios una fuente de verdad compartida en lugar de la palabra de un proveedor.</p>
+<h3>3.4 Jerarquía nativa</h3>
+<p>Los subrealms convierten un nombre en una organización: +bitagent.finance.treasury se entiende de un vistazo. La autoridad puede delegarse hacia abajo y cada unidad puede tener sus propias claves y reglas, como hacen las instituciones reales al dividir responsabilidades. La página de ejemplo muestra una estructura completa.</p>
+<h3>3.5 Coordinación con confianza mínima</h3>
+<p>Los agentes pueden probar el control firmando con la clave detrás del UTXO y verificar a sus contrapartes de la misma forma. Compromisos como pagos, depósitos en garantía o acciones con plazo se expresan como condiciones de gasto, así la cooperación no depende de confiar en un coordinador central.</p>
+<h3>3.6 Seguridad heredada y resistencia a la censura</h3>
+<p>El ancla hereda la seguridad de la prueba de trabajo de Bitcoin y de su red amplia y descentralizada. Revertir o bloquear la identidad de un agente exigiría atacar la capa base, un listón mucho más alto que cerrar una cuenta.</p>
+<h3>3.7 Nativa del valor</h3>
+<p>Una identidad que vive junto al dinero puede tener presupuestos, recibir pagos y financiarse directamente. El agente no necesita intercambiar mensajes con un banco: el mismo modelo UTXO que prueba quién es también contiene lo que posee.</p>
+<h3>3.8 Abierta y componible</h3>
+<p>La capa base no pide permiso. Cualquiera puede construir indexadores, billeteras, registros o marcos de agentes alrededor de los mismos nombres, y las herramientas independientes interoperan porque leen los mismos datos públicos.</p>
+<h2>4. Una arquitectura por capas</h2>
+<p><b>Capa de identidad:</b> el Realm y sus subrealms. <b>Capa de autoridad:</b> las claves y condiciones de gasto que los controlan, idealmente multifirma con bloqueos de tiempo. <b>Capa de ejecución:</b> el software del agente, que corre fuera de la cadena porque calcular en Bitcoin es caro. <b>Capa de datos:</b> indexadores que exponen nombres, propiedad y registros a las aplicaciones. El principio es simple: calcular fuera de la cadena, comprometer en la cadena. Solo la identidad, la autoridad y los compromisos de claves necesitan las garantías del libro.</p>
+<h2>5. Una organización de agentes</h2>
+<p>Un nombre raíz puede dividirse en ramas de gobernanza, finanzas, operaciones, tecnología y comunidad. Gobernanza propone y vota, finanzas guarda y audita los fondos, operaciones ejecuta y resuelve tareas, tecnología construye y protege, y comunidad atiende y modera. Separar estos roles limita lo que puede hacer un solo agente o una sola clave, con la misma lógica de mínimo privilegio de las instituciones tradicionales.</p>
+<h2>6. Riesgos y límites</h2>
+<p>Un argumento honesto debe incluir los costos. Perder una clave es definitivo y una clave robada es una identidad robada, por eso importa diseñar bien la custodia. Las comisiones y la capacidad de la capa base limitan cuánto se puede escribir en la cadena. El estado de Realms y subrealms depende de indexadores que interpretan el protocolo, así que importan su corrección y disponibilidad. El estatus legal de los agentes autónomos y de las organizaciones en la cadena es incierto y varía según el país. Los agentes también pueden fallar o ser manipulados, por lo que cualquier uso real debería incluir límites de gasto, supervisión humana, auditorías y permisos revocables. Por último, la escasez de nombres invita a la especulación, y nada de esto es asesoramiento financiero ni legal.</p>
+<h2>7. Conclusión</h2>
+<p>Si los agentes van a actuar, poseer y coordinarse, necesitan una identidad propia y no alquilada. Un UTXO de Bitcoin ofrece soberanía, unicidad, auditabilidad, jerarquía y seguridad en una sola pieza, y los nombres como los Realms la vuelven usable para las personas. El enfoque es temprano y tiene riesgos reales, pero la dirección es sólida: la identidad debe anclarse donde ya vive el valor. Mirá el <a href="ejemplo-es.html">ejemplo de +bitagent</a> para ver una estructura concreta.</p>
+<h2>Referencias</h2>
+<ol class="refs"><li>Nakamoto, S. (2008). <i>Bitcoin: A Peer-to-Peer Electronic Cash System.</i> bitcoin.org/bitcoin.pdf</li><li>Documentación del protocolo Atomicals, docs.atomicals.xyz</li><li>Documentación para desarrolladores de Bitcoin, transacciones y UTXO, developer.bitcoin.org</li></ol>
+</article></main>
+<footer>✳ UTXOAGENT · Un experimento comunitario independiente, exploratorio y sin asesoramiento financiero · g47s@proton.me</footer>
+<script data-goatcounter="https://utxoagent.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>try{localStorage.setItem("lang","es")}catch(e){}</script>
+</body></html>
